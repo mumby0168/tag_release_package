@@ -2,14 +2,20 @@ name: Release Package Version
 on:
   push:
     tags:
-      - v*      
-jobs:
+      - v*     
+jobs: 
   build:
     if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+    - name: Extract Version Numbe
+      id: v
+    - uses: frabert/replace-string-action@9b62dfe3ae936b1cc380f2421c8ac9e63a4a3e85
+      with:
+        pattern: '[a-z0-9A-Z\/]+v'
+        string: $GITHUB_REF
     - name: Tag Name
-      run: echo $GITHUB_REF
+      run: echo ${{steps.v.outputs.replaced}}
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
