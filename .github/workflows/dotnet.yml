@@ -7,10 +7,10 @@ jobs:
   build:
     if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    steps:
-    - name: Extract Version Numbe
-      id: v
+    steps:    
+    - name: Extract Version Numbe      
     - uses: frabert/replace-string-action@9b62dfe3ae936b1cc380f2421c8ac9e63a4a3e85
+      id: v
       with:
         pattern: '[a-z0-9A-Z\/]+v'
         string: $GITHUB_REF
