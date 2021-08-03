@@ -1,22 +1,21 @@
-name: .NET
-
+name: Release Package Version
 on:
   push:
-    branches: [ main ]
-    tags: v*
-
+    tags:
+      - v*      
 jobs:
   build:
-
+    if: github.event.base_ref == 'refs/heads/master
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./Fruitless/Fruitless.csproj
+      
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ./Fruitless/Fruitless.csproj
