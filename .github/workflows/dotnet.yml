@@ -8,14 +8,16 @@ jobs:
     if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:    
+    - name: Print Tag Ref
+      run: echo $GITHUB_REF
     - name: Extract Version Number     
       id: verion-number
       uses: frabert/replace-string-action@9b62dfe3ae936b1cc380f2421c8ac9e63a4a3e85      
       with:
-        pattern: '[a-z0-9A-Z\/]+v'
+        pattern: '[0-9.]+'
         string: $GITHUB_REF
     - name: Print Version Number
-      run: echo ${{steps.version-number.outputs.replaced}}
+      run: echo '${{steps.version-number.outputs.replaced}}'
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
