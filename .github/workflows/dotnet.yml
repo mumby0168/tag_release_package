@@ -1,8 +1,10 @@
 name: Release Package Version
 on:
   push:
-    tags:
-      - v*     
+    branches:
+      - master
+    #tags:
+     # - v*     
 jobs: 
   build:
     if: github.event.base_ref == 'refs/heads/main'
@@ -16,7 +18,7 @@ jobs:
       uses: actions-ecosystem/action-regex-match@v2
       id: regex-match
       with:
-        text: $GITHUB_REF
+        text: 'refs/head/v0.9'
         regex: '[0-9.]+'
        
     - name: Print Version Number
