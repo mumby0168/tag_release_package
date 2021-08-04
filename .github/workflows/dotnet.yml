@@ -36,4 +36,10 @@ jobs:
       run: dotnet build ./Fruitless/Fruitless.csproj
       
     - name: Pack
-      run: dotnet pack ./Fruitless/Fruitless.csproj -p:PackageVersion='${{ steps.regex-match.outputs.match }}'
+      run: dotnet pack ./Fruitless/Fruitless.csproj -p:PackageVersion='${{ steps.regex-match.outputs.match }}' --output packages
+      
+    - name: Upload Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: fruitless-'${{ steps.regex-match.outputs.match }}'
+        path: packages/
