@@ -39,7 +39,7 @@ jobs:
       run: dotnet pack ./Fruitless/Fruitless.csproj -p:PackageVersion='${{ steps.regex-match.outputs.match }}' --output packages
       
     - name: Publish Package
-      run: nuget push packages\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
       
     - name: Upload Package
       uses: actions/upload-artifact@v2
