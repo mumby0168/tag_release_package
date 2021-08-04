@@ -1,23 +1,23 @@
 name: Release Package Version
 on:
   push:
-    branches: [ main ]
-    #tags:
-     # - v*     
+    #branches: [ main ]
+    tags:
+     - v*     
 jobs: 
   build:
-    #if: github.event.base_ref == 'refs/heads/main'
+    if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:    
     
-    #- name: Print Tag Ref
-     # run: echo $GITHUB_REF
+    - name: Print Tag Ref
+      run: echo $GITHUB_REF
       
     - name: Extract Version Number
       uses: actions-ecosystem/action-regex-match@v2
       id: regex-match
       with:
-        text: 'refs/head/v0.9'
+        text: '$GITHUB_REF'
         regex: '[0-9.]+'
        
     - name: Print Version Number
