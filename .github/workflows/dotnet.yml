@@ -34,3 +34,6 @@ jobs:
       
     - name: Build
       run: dotnet build ./Fruitless/Fruitless.csproj
+      
+    - name: Pack
+      run: dotnet pack ./Fruitless/Fruitless.csproj -p:PackageVersion='${{ steps.regex-match.outputs.match }}'
