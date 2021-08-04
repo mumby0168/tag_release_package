@@ -17,7 +17,7 @@ jobs:
       uses: actions-ecosystem/action-regex-match@v2
       id: regex-match
       with:
-        text: '${{ env.GITHUB_REF }}'
+        text: ${{ github.ref }}
         regex: '[0-9.]+'
        
     - name: Print Version Number
